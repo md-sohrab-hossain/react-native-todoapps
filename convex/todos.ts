@@ -8,11 +8,11 @@ export const getTodos = query({
   },
 });
 
-export const addTodos = mutation({
+export const addTodo = mutation({
   args: { text: v.string() },
   handler: async (ctx, args) => {
     const todoId = await ctx.db.insert("todos", {
-      title: args.text,
+      text: args.text,
       isCompleted: false,
     });
 
@@ -21,12 +21,14 @@ export const addTodos = mutation({
 });
 
 export const toggleTodo = mutation({
-  args: { id: v.id("todos"), isCompleted: v.boolean() },
+  args: { id: v.id("todos") },
   handler: async (ctx, args) => {
     const todo = await ctx.db.get(args.id);
     if (!todo) throw new ConvexError("Todo not found");
 
-    await ctx.db.patch(args.id, { isCompleted: !todo.isCompleted });
+    await ctx.db.patch(args.id, {
+      isCompleted: !todo.isCompleted,
+    });
   },
 });
 
@@ -44,19 +46,20 @@ export const updateTodo = mutation({
   },
   handler: async (ctx, args) => {
     await ctx.db.patch(args.id, {
-      title: args.text,
+      text: args.text,
     });
   },
 });
 
 export const clearAllTodos = mutation({
   handler: async (ctx) => {
-    const allTodos = await ctx.db.query("todos").collect();
+    const todos = await ctx.db.query("todos").collect();
 
-    for (const todo of allTodos) {
+    // Delete all todos
+    for (const todo of todos) {
       await ctx.db.delete(todo._id);
     }
 
-    return { deletedCount: allTodos.length };
+    return { deletedCount: todos.length };
   },
 });

@@ -9,7 +9,7 @@ import { Alert, TextInput, TouchableOpacity, View } from "react-native";
 const TodoInput = () => {
   const { colors } = useTheme();
   const [newTodo, setNewTodo] = useState("");
-  const addTodo = useMutation(api.todos.addTodos);
+  const addTodo = useMutation(api.todos.addTodo);
 
   const handleAddTodo = async () => {
     if (newTodo.trim()) {
