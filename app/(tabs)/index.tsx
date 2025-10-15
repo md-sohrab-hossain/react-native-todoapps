@@ -1,4 +1,5 @@
 import Header from "@/components/Header";
+import TodoInput from "@/components/TodoInput";
 import { useTheme } from "@/hooks/useTheme";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "react-native";
@@ -13,6 +14,7 @@ export default function Index() {
 
       <SafeAreaView className="flex-1">
         <Header />
+        <TodoInput />
       </SafeAreaView>
     </LinearGradient>
   );
