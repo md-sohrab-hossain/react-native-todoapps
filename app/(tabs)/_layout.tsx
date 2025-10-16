@@ -9,8 +9,8 @@ const TabsLayout = () => {
   return (
     <Tabs
       screenOptions={{
-        tabBarInactiveTintColor: colors.primary,
-        tabBarActiveTintColor: colors.textMuted,
+        tabBarInactiveTintColor: colors.textMuted,
+        tabBarActiveTintColor: colors.primary,
         tabBarStyle: {
           backgroundColor: colors.surface,
           borderTopColor: colors.border,
