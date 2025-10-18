@@ -3,13 +3,9 @@ import { useTheme } from "@/hooks/useTheme";
 import { Ionicons } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import TodoButtonList from "./TodoButtonList";
+import TodoListEditItem from "./TodoListEditItem";
 
 interface TodoProps {
   item: Doc<"todos">;
@@ -69,88 +65,20 @@ const TodoListItem = ({
         </TouchableOpacity>
 
         {editTodoId === item._id ? (
-          <View className="flex-1">
-            <TextInput
-              style={{ borderRadius: 16 }}
-              className={`border-2 px-4 py-3 text-[17px] text-medium mb-4 bg-[${colors.backgrounds.editInput}] border-[${colors.primary}] text-[${colors.text}]`}
-              value={editText}
-              onChangeText={setEditText}
-              autoFocus
-              multiline
-              placeholder="Edit your todo..."
-              placeholderTextColor={colors.textMuted}
-            />
-            <View className="flex-row gap-3">
-              <TouchableOpacity
-                onPress={() => {
-                  handleSaveEdit(editTodoId, editText);
-                  setEditTodoId(null);
-                  setEditText("");
-                }}
-                activeOpacity={0.8}
-              >
-                <LinearGradient
-                  colors={colors.gradients.success}
-                  style={{ borderRadius: 20 }}
-                  className="flex-row items-center gap-2 px-4 py-[10px]"
-                >
-                  <Ionicons name="checkmark" size={16} color="#fff" />
-                  <Text className="text-white text-sm font-semibold">Save</Text>
-                </LinearGradient>
-              </TouchableOpacity>
-
-              <TouchableOpacity onPress={handleCancelEdit} activeOpacity={0.8}>
-                <LinearGradient
-                  colors={colors.gradients.muted}
-                  style={{ borderRadius: 20 }}
-                  className="flex-row items-center gap-2 px-4 py-[10px]"
-                >
-                  <Ionicons name="close" size={16} color="#fff" />
-                  <Text className="text-white text-sm font-semibold">
-                    Cancel
-                  </Text>
-                </LinearGradient>
-              </TouchableOpacity>
-            </View>
-          </View>
+          <TodoListEditItem
+            editText={editText}
+            editTodoId={editTodoId}
+            setEditText={setEditText}
+            setEditTodoId={setEditTodoId}
+            handleSaveEdit={handleSaveEdit}
+            handleCancelEdit={handleCancelEdit}
+          />
         ) : (
-          <>
-            <View className="flex-1 mt-1">
-              <Text
-                className={`text-[17px] font-medium text-${colors.text} ${item.isCompleted ? `line-through text-${colors.textMuted} opacity-60` : ""}`}
-              >
-                {item.text}
-              </Text>
-            </View>
-
-            <View className="flex-row gap-3">
-              <TouchableOpacity
-                onPress={() => handleEdit(item)}
-                activeOpacity={0.8}
-              >
-                <LinearGradient
-                  style={{ borderRadius: 20 }}
-                  colors={colors.gradients.warning}
-                  className="w-10 h-10 items-center justify-center"
-                >
-                  <Ionicons name="pencil" size={14} color="#fff" />
-                </LinearGradient>
-              </TouchableOpacity>
-
-              <TouchableOpacity
-                onPress={() => handleDeleteTodo(item._id)}
-                activeOpacity={0.8}
-              >
-                <LinearGradient
-                  style={{ borderRadius: 20 }}
-                  colors={colors.gradients.danger}
-                  className="w-10 h-10 items-center justify-center"
-                >
-                  <Ionicons name="trash" size={14} color="#fff" />
-                </LinearGradient>
-              </TouchableOpacity>
-            </View>
-          </>
+          <TodoButtonList
+            item={item}
+            handleEdit={handleEdit}
+            handleDeleteTodo={handleDeleteTodo}
+          />
         )}
       </LinearGradient>
     </View>
