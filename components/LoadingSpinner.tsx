@@ -7,9 +7,12 @@ const LoadingSpinner = () => {
 
   return (
     <LinearGradient colors={colors.gradients.background} className="flex-1">
-      <View className="flex-1 justify-center items-center">
+      <View className="items-center justify-center flex-1">
         <ActivityIndicator size="large" color={colors.primary} />
-        <Text className={`mt-5 text-lg font-medium text-[${colors.text}]`}>
+        <Text
+          className="mt-5 text-lg font-medium"
+          style={{ color: colors.text }}
+        >
           Loading your todos...
         </Text>
       </View>

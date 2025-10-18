@@ -27,8 +27,14 @@ const TodoListEditItem = ({
   return (
     <View className="flex-1">
       <TextInput
-        style={{ borderRadius: 16 }}
-        className={`border-2 px-4 py-3 text-[17px] text-medium mb-4 bg-[${colors.backgrounds.editInput}] border-[${colors.primary}] text-[${colors.text}]`}
+        style={{
+          borderRadius: 16,
+          color: colors.text,
+          backgroundColor: colors.backgrounds.editInput,
+          borderWidth: 2,
+          borderColor: colors.primary,
+        }}
+        className="px-4 py-3 text-[17px] font-medium mb-4"
         value={editText}
         onChangeText={setEditText}
         autoFocus

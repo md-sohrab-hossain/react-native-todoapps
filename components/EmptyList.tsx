@@ -15,11 +15,15 @@ const EmptyState = () => {
       >
         <Ionicons name="clipboard-outline" size={60} color={colors.textMuted} />
       </LinearGradient>
-      <Text className={`text-[24px] font-bold mb-2 text-${colors.text}`}>
+      <Text
+        className="text-[24px] font-bold mb-2"
+        style={{ color: colors.text }}
+      >
         No todos yet!
       </Text>
       <Text
-        className={`text-[17px] text-center py-2 line-height-[24px] ${colors.textMuted}`}
+        style={{ color: colors.textMuted }}
+        className="text-[17px] text-center py-2 line-height-[24px]"
       >
         Add your first todo above to get started
       </Text>

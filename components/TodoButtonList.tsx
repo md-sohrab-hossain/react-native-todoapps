@@ -22,7 +22,10 @@ const TodoButtonList = ({
     <>
       <View className="flex-1 mt-1">
         <Text
-          className={`text-[17px] font-medium text-${colors.text} ${item.isCompleted ? `line-through text-${colors.textMuted} opacity-60` : ""}`}
+          style={{ color: item.isCompleted ? colors.textMuted : colors.text }}
+          className={`text-[17px] font-medium ${
+            item.isCompleted ? "line-through opacity-60" : ""
+          }`}
         >
           {item.text}
         </Text>
